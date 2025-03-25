@@ -1,18 +1,17 @@
-# Usar imagem Node.js oficial
-FROM node:18
-
 # Definir diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copiar os arquivos do projeto MCP para o container
+# Copiar os arquivos essenciais primeiro (para otimizar cache)
 COPY package.json package-lock.json ./
+
+# Instalar dependências
 RUN npm install
 
-# Copiar todo o código-fonte para dentro do container
+# Copiar todo o código do projeto
 COPY . .
 
-# Expor a porta 3000 (ou outra configurada no MCP)
+# Expor a porta do servidor MCP
 EXPOSE 3000
 
-# Comando para iniciar o servidor MCP
+# Comando para rodar o servidor
 CMD ["node", "server.js"]
