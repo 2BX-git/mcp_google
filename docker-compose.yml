@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    container_name: mcp_google_calendar
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    restart: always
+    environment:
+      NODE_ENV: production
+      GOOGLE_CREDENTIALS: /app/credentials.json
